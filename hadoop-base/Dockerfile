@@ -1,4 +1,4 @@
-FROM aiurtech/virgo-base:0.1.5
+FROM aiurtech/virgo-base:0.2.6
 
 ENV HADOOP_VERSION 2.7.7
 ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
@@ -15,3 +15,6 @@ ENV HADOOP_CONF_DIR=/etc/hadoop
 
 ENV HADOOP_PREFIX=/opt/hadoop-$HADOOP_VERSION
 ENV PATH $HADOOP_PREFIX/bin/:$PATH
+
+COPY coordinator.sh /opt/coordinator.sh
+RUN chmod +x /opt/coordinator.sh

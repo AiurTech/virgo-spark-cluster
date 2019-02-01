@@ -30,7 +30,13 @@ function wait_for_it()
     echo "[$i/$max_try] $service:${port} is available."
 }
 
+echo "Service Precondition Checks for ${SERVICE_PRECONDITION[@]}"
 for i in ${SERVICE_PRECONDITION[@]}
 do
     wait_for_it ${i}
 done
+echo "Service Precondition Checks Completed"
+
+echo "Executing CMD: $@"
+
+exec "$@"
