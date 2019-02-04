@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.2.6
+FROM aiurtech/hadoop-base:0.2.8
 
 MAINTAINER Aiur Tech <cto+docker@aiurtech.co.uk>
 

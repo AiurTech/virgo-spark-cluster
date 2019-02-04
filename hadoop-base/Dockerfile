@@ -1,20 +1,17 @@
-FROM aiurtech/virgo-base:0.2.6
+FROM aiurtech/virgo-base:0.2.8
 
-ENV HADOOP_VERSION 2.7.7
 ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 RUN set -x \
     && curl -fSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \    
     && tar -xvf /tmp/hadoop.tar.gz -C /opt/ \
     && rm /tmp/hadoop.tar.gz*
 
-RUN ln -s /opt/hadoop-$HADOOP_VERSION/etc/hadoop /etc/hadoop
-RUN mkdir /opt/hadoop-$HADOOP_VERSION/logs
-RUN mkdir /hadoop-data
+ENV HADOOP_HOME=/opt/hadoop-$HADOOP_VERSION
 
-ENV HADOOP_CONF_DIR=/etc/hadoop
+RUN ln -s $HADOOP_HOME/etc/hadoop $HADOOP_CONF_DIR
+RUN mkdir $HADOOP_HOME/logs
 
-ENV HADOOP_PREFIX=/opt/hadoop-$HADOOP_VERSION
-ENV PATH $HADOOP_PREFIX/bin/:$PATH
+ENV PATH $HADOOP_HOME/bin/:$PATH
 
 COPY coordinator.sh /opt/coordinator.sh
 RUN chmod +x /opt/coordinator.sh
