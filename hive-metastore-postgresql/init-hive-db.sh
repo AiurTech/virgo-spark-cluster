@@ -17,7 +17,3 @@ WHERE tableowner = CURRENT_USER and schemaname = 'public';
   \o
   \i /tmp/grant-privs
 EOSQL
-
-
-#   \i /hive/hive-schema-postgres.sql
-#  \i /hive/hive-txn-schema-postgres.sql

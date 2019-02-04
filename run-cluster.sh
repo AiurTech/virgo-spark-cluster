@@ -18,6 +18,11 @@ docker run -d --name hive-metastore-postgresql -h hive-metastore-postgresql --ne
 	-p 5432:5432 \
 	$REPO/hive-metastore-postgresql:$CLUSTER_VERSION
 
+docker run -d --name hive-metastore -h hive-metastore --net $NETWORK_NAME \
+        -p 10000:10000 \
+		--link hive-metastore-postgresql:hive-metastore-postgresql \
+        $REPO/hive-metastore:$CLUSTER_VERSION
+
 echo "Virgo Cluster Starting..."
 echo -e "\033[1;36m$(cat virgo.sh)\033[0m"
 

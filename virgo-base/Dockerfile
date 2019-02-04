@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-slim-stretch
 
-MAINTAINER Aiur Tech <cto+docker@aiurtech.co.uk>
+LABEL maintainer "Aiur Tech <cto+docker@aiurtech.co.uk>"
 
 ENV HADOOP_VERSION 2.7.7
 ENV HIVE_VERSION 1.2.2
@@ -11,3 +11,5 @@ RUN apt-get update \
 && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p $HADOOP_CONF_DIR
+
+COPY virgo-utils.sh /opt/virgo-utils.sh

@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.2.8
+FROM aiurtech/hadoop-base:0.3.0
 
 ENV HIVE_URL https://www-eu.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 
@@ -14,8 +14,17 @@ RUN set -x \
 COPY core-site.xml $HADOOP_CONF_DIR/core-site.xml
 COPY hive-site.xml $HADOOP_CONF_DIR/hive-site.xml
 
+RUN mkdir -p /usr/share/man/man1 \
+&& mkdir -p /usr/share/man/man7 \
+&& apt-get update \
+&& apt-get install --no-install-recommends --no-install-suggests -y apt-utils postgresql-client-9.6 \
+&& rm -rf /var/lib/apt/lists/*
+
 ADD https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar $HIVE_HOME/lib/
 
 EXPOSE 10000
 
-CMD hive --service metastore
+COPY run.sh /opt/run.sh
+RUN chmod u+x /opt/run.sh
+
+CMD /opt/run.sh

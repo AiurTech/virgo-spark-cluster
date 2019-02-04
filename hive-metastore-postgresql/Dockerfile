@@ -1,5 +1,5 @@
 FROM postgres:9.5
 
-MAINTAINER Aiur Tech <cto+docker@aiurtech.co.uk>
+LABEL maintainer "Aiur Tech <cto+docker@aiurtech.co.uk>"
 
 ADD init-hive-db.sh /docker-entrypoint-initdb.d/init-user-db.sh

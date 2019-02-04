@@ -1,13 +1,12 @@
-FROM aiurtech/hadoop-base:0.2.8
-
-MAINTAINER Aiur Tech <cto+docker@aiurtech.co.uk>
+FROM aiurtech/hadoop-base:0.3.0
 
 RUN mkdir -p /hadoop/namenode
 
 COPY hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
-COPY run.sh /opt/run.sh
 
+COPY run.sh /opt/run.sh
 RUN chmod u+x /opt/run.sh
+
 RUN adduser --system yarn
 RUN groupadd supergroup
 RUN usermod -a -G supergroup yarn

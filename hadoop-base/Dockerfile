@@ -1,4 +1,4 @@
-FROM aiurtech/virgo-base:0.2.8
+FROM aiurtech/virgo-base:0.3.0
 
 ENV HADOOP_URL https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 RUN set -x \
