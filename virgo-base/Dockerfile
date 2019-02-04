@@ -4,6 +4,7 @@ LABEL maintainer "Aiur Tech <cto+docker@aiurtech.co.uk>"
 
 ENV HADOOP_VERSION 2.7.7
 ENV HIVE_VERSION 1.2.2
+ENV SPARK_VERSION=2.2.3
 ENV HADOOP_CONF_DIR=/etc/hadoop
 
 RUN apt-get update \

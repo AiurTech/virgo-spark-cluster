@@ -37,6 +37,25 @@ docker run -d --name hive-metastore -h hive-metastore --net $NETWORK_NAME \
 		--link hive-metastore-postgresql:hive-metastore-postgresql \
         $REPO/hive-metastore:$CLUSTER_VERSION
 
+echo "Starting Spark..."
+docker run -d --name spark-master -h spark-master --net $NETWORK_NAME \
+	-p 6066:6066 -p 7077:7077 -p 9090:9090 \
+	--link hadoop-namenode:hadoop-namenode \
+	--link hadoop-datanode:hadoop-datanode \
+	--link yarn-resourcemanager:yarn-resourcemanager \
+	--link hive-metastore:hive-metastore \
+	$REPO/spark-master:$CLUSTER_VERSION
+
+docker run -d --name spark-worker -h spark-worker --net $NETWORK_NAME \
+	-p 9091:9091 \
+	--link hadoop-namenode:hadoop-namenode \
+	--link hadoop-datanode:hadoop-datanode \
+	--link yarn-resourcemanager:yarn-resourcemanager \
+	--link hive-metastore-postgresql:hive-metastore-postgresql \
+	--link hive-metastore:hive-metastore \
+	--link spark-master:spark-master \
+	$REPO/spark-worker:$CLUSTER_VERSION
+
 echo "Virgo Cluster Starting..."
 echo -e "\033[1;36m$(cat virgo.sh)\033[0m"
 
@@ -59,7 +78,5 @@ do
 done
 }
 
+sleep 30 
 docker ps
-wait 
-
-# psql -U hive -h hive-metastore-postgresql -d metastore -t -c 'select * from "VERSION"' | grep "2.1.0"
