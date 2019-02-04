@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.3.0
+FROM aiurtech/hadoop-base:0.3.2
 
 ENV HIVE_URL https://www-eu.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 
@@ -23,6 +23,9 @@ RUN mkdir -p /usr/share/man/man1 \
 ADD https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar $HIVE_HOME/lib/
 
 EXPOSE 10000
+
+HEALTHCHECK --interval=10m --timeout=15s --start-period=30s \ 
+    CMD curl -f http://hive-metastore:10000/ || exit 1
 
 COPY run.sh /opt/run.sh
 RUN chmod u+x /opt/run.sh

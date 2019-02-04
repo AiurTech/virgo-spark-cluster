@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 source config.sh
 
@@ -12,6 +13,19 @@ docker run -d --name hadoop-datanode -h hadoop-datanode --net $NETWORK_NAME \
 	-p 50075:50075 \
 	--link hadoop-namenode:hadoop-namenode \
 	$REPO/hadoop-datanode:$CLUSTER_VERSION
+
+docker run -d --name yarn-resourcemanager -h yarn-resourcemanager --net $NETWORK_NAME \
+	-p 8030:8030 -p 8031:8031 -p 8032:8032 -p 8033:8033 -p 8088:8088 \
+	--link hadoop-namenode:hadoop-namenode \
+	--link hadoop-datanode:hadoop-datanode \
+	$REPO/yarn-resourcemanager:$CLUSTER_VERSION
+
+docker run -d --name yarn-nodemanager -h yarn-nodemanager --net $NETWORK_NAME \
+	-p 8042:8042 \
+	--link hadoop-namenode:hadoop-namenode \
+	--link hadoop-datanode:hadoop-datanode \
+	--link yarn-resourcemanager:yarn-resourcemanager \
+	$REPO/yarn-nodemanager:$CLUSTER_VERSION	
 
 echo "Starting Hive..."
 docker run -d --name hive-metastore-postgresql -h hive-metastore-postgresql --net $NETWORK_NAME \

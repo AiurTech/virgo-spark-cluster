@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 source config.sh
 
 REMOVE=${1:-Y}

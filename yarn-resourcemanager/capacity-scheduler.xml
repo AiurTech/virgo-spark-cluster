@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <property>
+     <name>yarn.scheduler.capacity.root.queues</name>
+    <value>test</value>
+  </property>
+  <property>
+     <name>yarn.scheduler.capacity.root.test.capacity</name>
+    <value>100</value>
+  </property>
+  <property>
+     <name>yarn.scheduler.capacity.root.test.maximum-applications</name>
+    <value>20</value>
+  </property>
+  <property>
+     <name>yarn.scheduler.capacity.root.test.maximum-am-resource-percent</name>
+    <value>0.4</value>
+  </property>
+</configuration>

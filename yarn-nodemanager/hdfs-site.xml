@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-
-<!-- Put site-specific property overrides in this file. -->
-
 <configuration>
   <property>
-     <name>fs.defaultFS</name>
+    <name>fs.default.name</name>
      <value>hdfs://hadoop-namenode:8020</value>
   </property>
- <!-- <property>
-     <name>dfs.data.dir</name>
-     <value>/mnt/hadoop/datanode</value>
-  </property> -->
 </configuration>

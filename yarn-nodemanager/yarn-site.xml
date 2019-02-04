@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+  <property>
+     <name>yarn.resourcemanager.bind-host</name>
+     <value>yarn-resourcemanager</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>yarn-resourcemanager</value>
+</property>
+</configuration>
