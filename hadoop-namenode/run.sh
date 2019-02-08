@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source /opt/virgo-utils.sh
+source $VIRGO_HOME/virgo-utils.sh
 
 echo "Formatting Namenode..."
 hdfs namenode -format -nonInteractive

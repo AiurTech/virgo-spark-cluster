@@ -47,7 +47,7 @@ docker run -d --name spark-master -h spark-master --net $NETWORK_NAME \
 	$REPO/spark-master:$CLUSTER_VERSION
 
 docker run -d --name spark-worker -h spark-worker --net $NETWORK_NAME \
-	-p 9091:9091 \
+	-p 8081:8081 \
 	--link hadoop-namenode:hadoop-namenode \
 	--link hadoop-datanode:hadoop-datanode \
 	--link yarn-resourcemanager:yarn-resourcemanager \

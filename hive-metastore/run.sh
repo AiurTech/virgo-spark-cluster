@@ -3,7 +3,7 @@
 # Enable Job Control
 set -m
 
-source /opt/virgo-utils.sh
+source $VIRGO_HOME/virgo-utils.sh
 
 while ! nc -z hive-metastore-postgresql 5432; do 
     echo "PostgresSQL Port not open..."

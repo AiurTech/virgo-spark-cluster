@@ -1,14 +1,15 @@
-FROM aiurtech/hadoop-base:0.4.0
+FROM aiurtech/hadoop-base:0.4.5
 
 ENV HIVE_URL https://www-eu.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 
-ENV HIVE_HOME=/opt/apache-hive-$HIVE_VERSION
+ENV HIVE_HOME=$VIRGO_HOME/apache-hive-$HIVE_VERSION
 ENV PATH $HIVE_HOME/bin:$PATH
 
 RUN set -x \
     && curl -fSL "$HIVE_URL" -o /tmp/apache-hive-$HIVE_VERSION-bin.tar.gz \    
-    && tar -xvf /tmp/apache-hive-$HIVE_VERSION-bin.tar.gz -C /opt/ \
-    && mv /opt/apache-hive-$HIVE_VERSION-bin ${HIVE_HOME} \
+    && tar -xf /tmp/apache-hive-$HIVE_VERSION-bin.tar.gz -C $VIRGO_HOME \
+    && mv $VIRGO_HOME/apache-hive-$HIVE_VERSION-bin ${HIVE_HOME} \
+    && chown -R virgo:hadoop $HIVE_HOME \
     && rm /tmp/apache-hive-$HIVE_VERSION-bin.tar.gz*
 
 COPY core-site.xml $HADOOP_CONF_DIR/core-site.xml
@@ -25,9 +26,10 @@ ADD https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar $HIVE_HOME/lib/
 EXPOSE 10000
 
 HEALTHCHECK --interval=10m --timeout=15s --start-period=30s \ 
-    CMD curl -f http://hive-metastore:10000/ || exit 1
+    CMD nc -vz hive-metastore 10000 || exit 1
 
-COPY run.sh /opt/run.sh
-RUN chmod u+x /opt/run.sh
+COPY run.sh $VIRGO_HOME/run.sh
+RUN chown virgo $VIRGO_HOME/run.sh && chmod u+x $VIRGO_HOME/run.sh && chown -R virgo:hadoop ${HIVE_HOME}
+USER virgo
 
-CMD /opt/run.sh
+CMD $VIRGO_HOME/run.sh
