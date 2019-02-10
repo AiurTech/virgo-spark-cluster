@@ -1,4 +1,4 @@
-FROM aiurtech/virgo-base:0.4.5
+FROM aiurtech/virgo-base:0.4.6
 
 RUN adduser --system virgo
 RUN groupadd hadoop
@@ -15,7 +15,9 @@ RUN set -x \
     && rm -rf $HADOOP_HOME/share/doc \
     && mkdir -p ${HADOOP_HOME}/logs \
     && chown -R virgo:hadoop $HADOOP_HOME \
-    && ln -s $HADOOP_HOME/etc/hadoop $HADOOP_CONF_DIR \
+    && cp $HADOOP_HOME/etc/hadoop/log4j.properties $HADOOP_CONF_DIR \
+    && cp $HADOOP_HOME/etc/hadoop/yarn-env.sh $HADOOP_CONF_DIR \
+    && chown -R virgo:hadoop $HADOOP_CONF_DIR \
     && rm /tmp/hadoop.tar.gz*
 
 ENV PATH $HADOOP_HOME/bin/:$PATH

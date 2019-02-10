@@ -12,6 +12,6 @@ RUN apt-get update \
 && apt-get install --no-install-recommends --no-install-suggests -y vim netcat curl \
 && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p $HADOOP_CONF_DIR
+RUN mkdir -p ${HADOOP_CONF_DIR}
 
 COPY virgo-utils.sh $VIRGO_HOME/virgo-utils.sh
