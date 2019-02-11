@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.4.6
+FROM aiurtech/hadoop-base:0.4.7
 
 ENV HIVE_URL https://www-eu.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz
 

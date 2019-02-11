@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #USER Config 
-VERSION=0.4.6
+VERSION=0.4.7
 NETWORK_NAME=virgo
 NETWORK_SUBNET=172.15.0.0/16
 

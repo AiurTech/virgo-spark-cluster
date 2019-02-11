@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.4.6
+FROM aiurtech/hadoop-base:0.4.7
 
 COPY hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
 COPY yarn-site.xml $HADOOP_CONF_DIR/yarn-site.xml
