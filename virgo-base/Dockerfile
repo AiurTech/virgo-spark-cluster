@@ -15,3 +15,5 @@ RUN apt-get update \
 RUN mkdir -p ${HADOOP_CONF_DIR}
 
 COPY virgo-utils.sh $VIRGO_HOME/virgo-utils.sh
+
+WORKDIR ${VIRGO_HOME}

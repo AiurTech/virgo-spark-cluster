@@ -4,7 +4,7 @@
 <configuration>
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:postgresql://hive-metastore-postgresql/test</value>
+        <value>jdbc:postgresql://hive-metastore-postgresql/metastore</value>
         <description>JDBC Url for Hive Metastore DB</description>
     </property>
     <property>

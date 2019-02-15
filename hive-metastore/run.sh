@@ -25,6 +25,6 @@ while [ "$(validateHive)" != "2" ]; do
     echo "Hive schema setup in progress"
     sleep 3
 done
-echo "PostgreSQL is ready to go for hive/metastore"
+echo "PostgreSQL is ready to go for hive@hive-metastore-postgresql/metastore"
 
 fg %1

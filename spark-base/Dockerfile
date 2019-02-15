@@ -1,12 +1,16 @@
-FROM aiurtech/hadoop-base:0.4.7
+FROM aiurtech/virgo-base:0.5.0
 
 ENV SPARK_HOME=$VIRGO_HOME/spark-$SPARK_VERSION
 
-ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-${SPARK_VERSION}-bin-without-hadoop.tgz
+RUN adduser --system virgo
+RUN groupadd hadoop
+RUN usermod -a -G hadoop virgo
+
+ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN set -x \
     && curl -fSL "$SPARK_URL" -o /tmp/spark.tgz \    
-    && tar -xvf /tmp/spark.tgz -C $VIRGO_HOME \
-    && mv $VIRGO_HOME/spark-${SPARK_VERSION}-bin-without-hadoop $SPARK_HOME \
+    && tar -xf /tmp/spark.tgz -C $VIRGO_HOME \
+    && mv $VIRGO_HOME/spark-${SPARK_VERSION}-bin-hadoop2.7 $SPARK_HOME \
     && mkdir -p $SPARK_HOME/logs \
     && chown -R virgo:hadoop $SPARK_HOME \
     && rm /tmp/spark.tgz*
