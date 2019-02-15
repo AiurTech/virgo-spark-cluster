@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.0
+FROM aiurtech/hadoop-base:0.5.1
 
 COPY core-site.xml $HADOOP_CONF_DIR/core-site.xml
 COPY hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
@@ -12,8 +12,8 @@ ENV HADOOP_YARN_HOME=$HADOOP_HOME
 ENV YARN_ROOT_LOGGER="DEBUG,RFA"
 ENV HADOOP_DAEMON_ROOT_LOGGER=DEBUG,RFA
 
-COPY run.sh $VIRGO_HOME/run.sh
-RUN chown virgo $VIRGO_HOME/run.sh && chmod u+x $VIRGO_HOME/run.sh
+COPY --chown=virgo:hadoop run.sh $VIRGO_HOME/run.sh
+
 USER virgo
 
-CMD $VIRGO_HOME/run.sh
+ENTRYPOINT $VIRGO_HOME/run.sh

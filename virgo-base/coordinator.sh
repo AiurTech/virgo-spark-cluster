@@ -30,13 +30,13 @@ function wait_for_it()
     echo "[$i/$max_try] $service:${port} is available."
 }
 
-echo "Service Precondition Checks for ${SERVICE_PRECONDITION[@]}"
-for i in ${SERVICE_PRECONDITION[@]}
-do
-    wait_for_it ${i}
-done
-echo "Service Precondition Checks Completed"
-
-echo "Executing CMD: $@"
-
-exec "$@"
+function wait_for_dependencies() {
+  local serviceName=$1
+  local dependencies=$2
+  echo "Service $serviceName has Dependencies: '${dependencies[@]}''"
+  for i in ${dependencies[@]}
+  do
+      wait_for_it ${i}
+  done
+  echo "Service $serviceName Dependencies Initialized. Starting..."
+}

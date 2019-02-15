@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.0
+FROM aiurtech/hadoop-base:0.5.1
 
 ENV HADOOP_OPTS "-Ddfs.data.dir=/hadoop/datanode -Dfs.defaultFS=hdfs://hadoop-namenode:8020"
 
@@ -9,9 +9,11 @@ RUN mkdir -p /hadoop/datanode && chown -R virgo:hadoop /hadoop/datanode
 
 EXPOSE 50075
 
-HEALTHCHECK --interval=10m --timeout=15s --start-period=30s \ 
-    CMD nc -vz hadoop-datanode 50010 || exit 1
+HEALTHCHECK --interval=2m --timeout=15s --start-period=30s \ 
+    CMD curl -f http://hadoop-datanode:50075  || exit 1
+    
+COPY --chown=virgo:hadoop run.sh $VIRGO_HOME/run.sh
 
 USER virgo
 
-ENTRYPOINT ["hdfs", "datanode"]
+ENTRYPOINT $VIRGO_HOME/run.sh

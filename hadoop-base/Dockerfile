@@ -1,16 +1,18 @@
-FROM aiurtech/virgo-base:0.5.0
+FROM aiurtech/virgo-base:0.5.1
 
 RUN adduser --system virgo
 RUN groupadd hadoop
 RUN usermod -a -G hadoop virgo
 
-RUN mkdir -p $VIRGO_HOME && chown virgo:hadoop ${VIRGO_HOME}
+RUN chown virgo:hadoop ${VIRGO_HOME}
 
 ENV HADOOP_HOME=$VIRGO_HOME/hadoop-$HADOOP_VERSION
+ENV HADOOP_CONF_DIR=/etc/hadoop
 
-ARG HADOOP_URL=https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
+RUN mkdir -p ${HADOOP_CONF_DIR}
+
 RUN set -x \
-    && curl -fSL "$HADOOP_URL" -o /tmp/hadoop.tar.gz \    
+    && curl -fSL "https://www.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" -o /tmp/hadoop.tar.gz \    
     && tar -xf /tmp/hadoop.tar.gz -C ${VIRGO_HOME} \
     && rm -rf $HADOOP_HOME/share/doc \
     && mkdir -p ${HADOOP_HOME}/logs \
@@ -21,6 +23,3 @@ RUN set -x \
     && rm /tmp/hadoop.tar.gz*
 
 ENV PATH $HADOOP_HOME/bin/:$PATH
-
-#COPY coordinator.sh /opt/coordinator.sh
-#RUN chmod +x /opt/coordinator.sh

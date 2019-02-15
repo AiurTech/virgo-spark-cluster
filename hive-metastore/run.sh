@@ -27,4 +27,6 @@ while [ "$(validateHive)" != "2" ]; do
 done
 echo "PostgreSQL is ready to go for hive@hive-metastore-postgresql/metastore"
 
+touch $VIRGO_HOME/initialized
+
 fg %1

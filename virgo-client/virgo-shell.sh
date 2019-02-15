@@ -1,7 +1,12 @@
 export YARN_CONF_DIR="$(pwd)"
 
-SPARK_LOCAL_IP=$(ip route get 1 | awk '{print $7}' | head -n 1)
 export HADOOP_USER_NAME=${1:-virgo}
+
+if [[ $(uname) -eq "Linux" ]]; then 
+	SPARK_LOCAL_IP=$(ip route get 1 | awk '{print $7}' | head -n 1)
+else
+	SPARK_LOCAL_IP=${2:-127.0.0.1}
+fi
 
 echo "Using Spark Local IP: $SPARK_LOCAL_IP connecting to remote YARN service as $HADOOP_USER_NAME"
 
