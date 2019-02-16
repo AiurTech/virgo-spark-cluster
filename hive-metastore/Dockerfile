@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.1
+FROM aiurtech/hadoop-base:0.5.2
 
 ENV HIVE_HOME=$VIRGO_HOME/apache-hive-$HIVE_VERSION
 ENV PATH $HIVE_HOME/bin:$PATH
@@ -20,10 +20,10 @@ RUN mkdir -p /usr/share/man/man1 \
 && apt-get install --no-install-recommends --no-install-suggests -y apt-utils postgresql-client-9.6 \
 && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 10000
+EXPOSE 9083
 
 HEALTHCHECK --interval=2m --timeout=15s --start-period=30s \ 
-    CMD [[ -f $VIRGO_HOME/initialized ]] || exit 1
+    CMD nc -vz hive-metastore 9083 && [[ -f $VIRGO_HOME/initialized ]] || exit 1
 
 COPY --chown=virgo:hadoop run.sh $VIRGO_HOME/run.sh
 

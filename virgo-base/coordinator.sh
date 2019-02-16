@@ -38,5 +38,5 @@ function wait_for_dependencies() {
   do
       wait_for_it ${i}
   done
-  echo "Service $serviceName Dependencies Initialized. Starting..."
+  echo "Service $serviceName dependencies initialization completed"
 }

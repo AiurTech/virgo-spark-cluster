@@ -1,4 +1,4 @@
-FROM aiurtech/spark-base:0.5.1
+FROM aiurtech/spark-base:0.5.2
 
 ENV SPARK_WORKER_UI_PORT 8081
 

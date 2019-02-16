@@ -1,4 +1,4 @@
-FROM aiurtech/virgo-base:0.5.1
+FROM aiurtech/virgo-base:0.5.2
 
 ENV SPARK_HOME=$VIRGO_HOME/spark-$SPARK_VERSION
 

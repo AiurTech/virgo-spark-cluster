@@ -33,7 +33,7 @@ docker run -d --name hive-metastore-postgresql -h hive-metastore-postgresql --ne
 	$REPO/hive-metastore-postgresql:$CLUSTER_VERSION
 
 docker run -d --name hive-metastore -h hive-metastore --net $NETWORK_NAME \
-        -p 10000:10000 \
+        -p 9083:9083 \
 		--link hive-metastore-postgresql:hive-metastore-postgresql \
         $REPO/hive-metastore:$CLUSTER_VERSION
 
@@ -100,5 +100,6 @@ function is_ready() {
 is_ready "hadoop-namenode" "NameNode RPC up" 
 is_ready "hadoop-datanode" "DataNode: Successfully sent block report"
 is_ready "spark-master" "Master: I have been elected leader! New state: ALIVE"
+is_ready "hive-metastore" "PostgreSQL is ready to go"
 
 docker ps
