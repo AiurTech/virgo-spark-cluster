@@ -6,7 +6,11 @@ source $VIRGO_HOME/coordinator.sh
 
 wait_for_dependencies "spark-master" $dependencies
 
-#$VIRGO_HOME/setup.sh
+echo "Waiting on other services to initialize."
+
+sleep 10
+
+$VIRGO_HOME/setup.sh
 
 ln -sf /dev/stdout $SPARK_HOME/logs/spark-master.out
 

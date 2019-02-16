@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.2
+FROM aiurtech/hadoop-base:0.5.3
 
 COPY yarn-site.xml $HADOOP_CONF_DIR/yarn-site.xml
 COPY capacity-scheduler.xml $HADOOP_CONF_DIR/capacity-scheduler.xml

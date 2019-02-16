@@ -1,10 +1,6 @@
-FROM aiurtech/virgo-base:0.5.2
+FROM aiurtech/hadoop-base:0.5.3
 
 ENV SPARK_HOME=$VIRGO_HOME/spark-$SPARK_VERSION
-
-RUN adduser --system virgo
-RUN groupadd hadoop
-RUN usermod -a -G hadoop virgo
 
 ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN set -x \
