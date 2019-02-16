@@ -62,21 +62,43 @@ echo -e "\033[1;36m$(cat virgo.sh)\033[0m"
 function check() {
 	local container="$1"
 	local expr="$2"
-	docker logs $container 2>&1 | grep "$expr"
-}
+        output=$(docker logs $container 2>&1 | tail -n 10 | grep -P "$expr")
+	match=$(echo "$output" | grep -o "$expr")
 
-function wait() {
-for i in 1 2 3 4 5 6 7 8 9 10
-do
-	check "hadoop-namenode" "NameNode RPC up" 
-	check "hadoop-datanode" "DataNode: Successfully sent block report"
-	if [[ $? == 1 ]]; then
-		sleep 10 
-	else 
-		echo "Started"	
+	if [[ $match == $expr ]]; then
+		return 0
+	else
+		return 1 
 	fi
-done
 }
 
-sleep 30 
+source virgo-base/coordinator.sh
+
+wait_for_dependencies "virgo" "hadoop-namenode:8020 hadoop-datanode:50075 spark-master:7077"
+
+function is_ready() {
+	local container="$1"
+	local expr="$2"
+	wait_time=3
+
+    local ready=1
+
+	for i in {1..10}; do
+		check $container "$expr"
+		if [[ $? == 1 ]]; then
+			sleep $wait_time
+		else
+            ready=0
+			break
+		fi 
+	done
+        if [[ $ready -eq 1 ]]; then
+                echo "$container was not ready in expected time."
+        fi
+}
+
+is_ready "hadoop-namenode" "NameNode RPC up" 
+is_ready "hadoop-datanode" "DataNode: Successfully sent block report"
+is_ready "spark-master" "Master: I have been elected leader! New state: ALIVE"
+
 docker ps
