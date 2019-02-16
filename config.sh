@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 #USER Config 
-VERSION=0.5.3
+VERSION=0.5.4
 NETWORK_NAME=virgo
 NETWORK_SUBNET=172.15.0.0/16
 
 # Defaults
 REPO=aiurtech
 base_containers=(virgo-base hadoop-base spark-base)
-containers=(hadoop-namenode hadoop-datanode hive-metastore-postgresql hive-metastore yarn-resourcemanager yarn-nodemanager spark-master spark-worker)
+containers=(hadoop-namenode hadoop-datanode hive-metastore-postgresql hive-metastore yarn-resourcemanager yarn-nodemanager spark-master spark-worker spark-historyserver)
 declare -a all_containers=(${base_containers[@]} ${containers[@]})

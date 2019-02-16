@@ -1,10 +1,9 @@
-FROM aiurtech/hadoop-base:0.5.3
+FROM aiurtech/hadoop-base:0.5.4
 
 ENV SPARK_HOME=$VIRGO_HOME/spark-$SPARK_VERSION
 
-ARG SPARK_URL=https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz
 RUN set -x \
-    && curl -fSL "$SPARK_URL" -o /tmp/spark.tgz \    
+    && curl -fSL "https://archive.apache.org/dist/spark/spark-$SPARK_VERSION/spark-${SPARK_VERSION}-bin-hadoop2.7.tgz" -o /tmp/spark.tgz \    
     && tar -xf /tmp/spark.tgz -C $VIRGO_HOME \
     && mv $VIRGO_HOME/spark-${SPARK_VERSION}-bin-hadoop2.7 $SPARK_HOME \
     && mkdir -p $SPARK_HOME/logs \

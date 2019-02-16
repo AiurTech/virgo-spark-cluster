@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.3
+FROM aiurtech/hadoop-base:0.5.4
 
 ENV HIVE_HOME=$VIRGO_HOME/apache-hive-$HIVE_VERSION
 ENV PATH $HIVE_HOME/bin:$PATH

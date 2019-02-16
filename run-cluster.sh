@@ -46,6 +46,15 @@ docker run -d --name spark-master -h spark-master --net $NETWORK_NAME \
 	--link hive-metastore:hive-metastore \
 	$REPO/spark-master:$CLUSTER_VERSION
 
+docker run -d --name spark-historyserver -h spark-historyserver --net $NETWORK_NAME \
+	-p 18080:18080 \
+	--link hadoop-namenode:hadoop-namenode \
+	--link hadoop-datanode:hadoop-datanode \
+	--link yarn-resourcemanager:yarn-resourcemanager \
+	--link yarn-nodemanager:yarn-nodemanager \
+	--link spark-master:spark-master \
+	$REPO/spark-historyserver:$CLUSTER_VERSION
+
 docker run -d --name spark-worker -h spark-worker --net $NETWORK_NAME \
 	-p 8081:8081 \
 	--link hadoop-namenode:hadoop-namenode \
@@ -54,6 +63,7 @@ docker run -d --name spark-worker -h spark-worker --net $NETWORK_NAME \
 	--link hive-metastore-postgresql:hive-metastore-postgresql \
 	--link hive-metastore:hive-metastore \
 	--link spark-master:spark-master \
+	--link spark-historyserver:spark-historyserver \
 	$REPO/spark-worker:$CLUSTER_VERSION
 
 echo "Virgo Cluster Starting..."
@@ -74,12 +84,12 @@ function check() {
 
 source virgo-base/coordinator.sh
 
-wait_for_dependencies "virgo" "hadoop-namenode:8020 hadoop-datanode:50075 spark-master:7077"
+wait_for_dependencies "virgo" "hadoop-namenode:8020 hadoop-datanode:50075 spark-master:9090"
 
 function is_ready() {
 	local container="$1"
 	local expr="$2"
-	wait_time=3
+	wait_time=4
 
     local ready=1
 
@@ -99,7 +109,7 @@ function is_ready() {
 
 is_ready "hadoop-namenode" "NameNode RPC up" 
 is_ready "hadoop-datanode" "DataNode: Successfully sent block report"
-is_ready "spark-master" "Master: I have been elected leader! New state: ALIVE"
 is_ready "hive-metastore" "PostgreSQL is ready to go"
+is_ready "spark-master" "Master: I have been elected leader! New state: ALIVE"
 
 docker ps

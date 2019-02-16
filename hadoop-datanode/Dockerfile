@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.3
+FROM aiurtech/hadoop-base:0.5.4
 
 ENV HADOOP_OPTS "-Ddfs.data.dir=/hadoop/datanode -Dfs.defaultFS=hdfs://hadoop-namenode:8020"
 

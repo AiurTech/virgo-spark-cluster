@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.3
+FROM aiurtech/hadoop-base:0.5.4
 
 COPY core-site.xml $HADOOP_CONF_DIR/core-site.xml
 COPY hdfs-site.xml $HADOOP_CONF_DIR/hdfs-site.xml
