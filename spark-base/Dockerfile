@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.4
+FROM aiurtech/hadoop-base:0.5.5
 
 ENV SPARK_HOME=$VIRGO_HOME/spark-$SPARK_VERSION
 

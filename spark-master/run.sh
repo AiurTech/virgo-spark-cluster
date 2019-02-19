@@ -1,14 +1,10 @@
 #!/bin/bash
 
-dependencies="hadoop-namenode:50070 hadoop-datanode:50075 hive-metastore:10000 yarn-resourcemanager:8088 yarn-nodemanager:8042"
+dependencies="hadoop-namenode:8020 hadoop-namenode:50070 hadoop-datanode:50075 hive-metastore:10000 yarn-resourcemanager:8088 yarn-nodemanager:8042"
 
 source $VIRGO_HOME/coordinator.sh
 
 wait_for_dependencies "spark-master" $dependencies
-
-echo "Waiting on other services to initialize."
-
-sleep 10
 
 $VIRGO_HOME/setup.sh
 

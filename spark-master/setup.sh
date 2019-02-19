@@ -1,4 +1,6 @@
 echo "Spark HDFS setup..."
+hdfs dfsadmin -safemode wait
+hdfs dfs -ls /
 hdfs dfs -mkdir /virgo
 hdfs dfs -mkdir -p /logs/spark
 hdfs dfs -mkdir -p /apps/spark/jars

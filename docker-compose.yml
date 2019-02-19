@@ -1,0 +1,106 @@
+version: '3'
+
+services:
+  hadoop-namenode:
+    container_name: hadoop-namenode
+    image: 'aiurtech/hadoop-namenode:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.2
+    #volumes:
+    #- namenode:/hadoop/dfs/name
+    ports:
+    - 8020:8020
+    - 50070:50070
+  hadoop-datanode:
+    container_name: hadoop-datanode
+    image: 'aiurtech/hadoop-datanode:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.20
+    #volumes:
+    #- datanode:/hadoop/dfs/data
+    ports:
+    - 50075:50075
+  yarn-resourcemanager:
+    container_name: yarn-resourcemanager
+    image: 'aiurtech/yarn-resourcemanager:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.3
+    ports:
+    - 8030:8030
+    - 8031:8031
+    - 8032:8032
+    - 8033:8033
+    - 8088:8088
+  yarn-nodemanager:
+    container_name: yarn-nodemanager
+    image: 'aiurtech/yarn-nodemanager:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.4
+    ports:
+    - 8042:8042
+  hive-metastore-postgresql:
+    container_name: hive-metastore-postgresql
+    image: 'aiurtech/hive-metastore-postgresql:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.5
+    ports:
+    - 5432:5432
+  hive-metastore:
+    container_name: hive-metastore
+    image: 'aiurtech/hive-metastore:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.10
+    ports:
+    - 9083:9083
+  hive:
+    container_name: hive
+    image: 'aiurtech/hive:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.11
+    ports:
+    - 10001:10001
+  spark-master:
+    container_name: spark-master
+    image: 'aiurtech/spark-master:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.30
+    ports:
+    - 6066:6066
+    - 7077:7077
+    - 9090:9090
+  spark-historyserver:
+    container_name: spark-historyserver
+    image: 'aiurtech/spark-historyserver:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.31
+    ports:
+    - 18080:18080
+  spark-worker:
+    container_name: spark-worker
+    image: 'aiurtech/spark-worker:0.5.5'
+    networks:
+      privnet:
+        ipv4_address: 172.15.0.40
+    ports:
+    - 8081:8081
+
+networks:
+  privnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.15.0.0/24
+
+#volumes:
+#  namenode:
+#  datanode:
