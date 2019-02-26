@@ -1,10 +1,11 @@
 #!/bin/bash
 
-dependencies="hadoop-namenode:8020 hadoop-datanode:50075 yarn-resourcemanager:8088 yarn-nodemanager:8042 spark-master:9090"
+declare -a dependencies=(hadoop-namenode:8020 hadoop-datanode:50075 yarn-resourcemanager:8088 yarn-nodemanager:8042 spark-master:9090)
 
+source $VIRGO_HOME/virgo-utils.sh
 source $VIRGO_HOME/coordinator.sh
 
-wait_for_dependencies "spark-historyserver" $dependencies
+wait_for_dependencies "spark-historyserver" "${dependencies[*]}"
 
 hdfs dfs -mkdir -p /logs/spark
 

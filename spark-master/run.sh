@@ -1,12 +1,17 @@
 #!/bin/bash
 
-dependencies="hadoop-namenode:8020 hadoop-namenode:50070 hadoop-datanode:50075 hive-metastore:10000 yarn-resourcemanager:8088 yarn-nodemanager:8042"
+declare -a dependencies=(hadoop-namenode:50070 hadoop-namenode:8020 hadoop-datanode:50075 hive-metastore:9083 yarn-resourcemanager:8088 yarn-nodemanager:8042)
 
+source $VIRGO_HOME/virgo-utils.sh
 source $VIRGO_HOME/coordinator.sh
 
-wait_for_dependencies "spark-master" $dependencies
+echo "[Init] $(timestamp)"
+
+wait_for_dependencies "spark-master" "${dependencies[*]}"
 
 $VIRGO_HOME/setup.sh
+
+echo "[Start] $(timestamp)"
 
 ln -sf /dev/stdout $SPARK_HOME/logs/spark-master.out
 

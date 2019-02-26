@@ -1,10 +1,10 @@
 #!/bin/bash
 
-dependencies="hadoop-namenode:50070 hadoop-datanode:50075"
+declare -a dependencies=(hadoop-namenode:50070 hadoop-datanode:50075)
 
 source $VIRGO_HOME/coordinator.sh
 
-wait_for_dependencies "yarn-nodemanager" $dependencies
+wait_for_dependencies "yarn-nodemanager" "${dependencies[*]}"
 
 source $HADOOP_CONF_DIR/yarn-env.sh
 

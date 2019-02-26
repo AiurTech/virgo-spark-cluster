@@ -3,7 +3,7 @@ version: '3'
 services:
   hadoop-namenode:
     container_name: hadoop-namenode
-    image: 'aiurtech/hadoop-namenode:0.5.5'
+    image: 'aiurtech/hadoop-namenode:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.2
@@ -12,19 +12,24 @@ services:
     ports:
     - 8020:8020
     - 50070:50070
+    hostname: hadoop-namenode
   hadoop-datanode:
     container_name: hadoop-datanode
-    image: 'aiurtech/hadoop-datanode:0.5.5'
+    image: 'aiurtech/hadoop-datanode:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.20
     #volumes:
     #- datanode:/hadoop/dfs/data
     ports:
+    - 50010:50010  
     - 50075:50075
+    hostname: hadoop-datanode
+    depends_on:
+    - hadoop-namenode
   yarn-resourcemanager:
     container_name: yarn-resourcemanager
-    image: 'aiurtech/yarn-resourcemanager:0.5.5'
+    image: 'aiurtech/yarn-resourcemanager:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.3
@@ -34,41 +39,55 @@ services:
     - 8032:8032
     - 8033:8033
     - 8088:8088
+    hostname: yarn-resourcemanager
   yarn-nodemanager:
     container_name: yarn-nodemanager
-    image: 'aiurtech/yarn-nodemanager:0.5.5'
+    image: 'aiurtech/yarn-nodemanager:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.4
     ports:
     - 8042:8042
+    hostname: yarn-nodemanager
+    depends_on:
+      - yarn-resourcemanager
   hive-metastore-postgresql:
     container_name: hive-metastore-postgresql
-    image: 'aiurtech/hive-metastore-postgresql:0.5.5'
+    image: 'aiurtech/hive-metastore-postgresql:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.5
     ports:
     - 5432:5432
+    hostname: hive-metastore-postgresql
   hive-metastore:
     container_name: hive-metastore
-    image: 'aiurtech/hive-metastore:0.5.5'
+    image: 'aiurtech/hive-metastore:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.10
     ports:
     - 9083:9083
+    hostname: hive-metastore
+    depends_on:
+      - hive-metastore-postgresql
   hive:
     container_name: hive
-    image: 'aiurtech/hive:0.5.5'
+    image: 'aiurtech/hive:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.11
     ports:
     - 10001:10001
+    hostname: hive
+    depends_on:
+      - hive-metastore-postgresql
+      - hive-metastore
+      - hadoop-namenode
+      - spark-master
   spark-master:
     container_name: spark-master
-    image: 'aiurtech/spark-master:0.5.5'
+    image: 'aiurtech/spark-master:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.30
@@ -76,22 +95,38 @@ services:
     - 6066:6066
     - 7077:7077
     - 9090:9090
+    hostname: spark-master
+    depends_on:
+      - hadoop-namenode
+      - hadoop-datanode
+      - hive-metastore-postgresql
+      - hive-metastore
   spark-historyserver:
     container_name: spark-historyserver
-    image: 'aiurtech/spark-historyserver:0.5.5'
+    image: 'aiurtech/spark-historyserver:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.31
     ports:
     - 18080:18080
+    hostname: spark-master
+    depends_on:
+      - hadoop-namenode
+      - hadoop-datanode
+      - spark-master
   spark-worker:
     container_name: spark-worker
-    image: 'aiurtech/spark-worker:0.5.5'
+    image: 'aiurtech/spark-worker:0.5.6'
     networks:
       privnet:
         ipv4_address: 172.15.0.40
     ports:
     - 8081:8081
+    hostname: spark-worker
+    depends_on:
+      - hadoop-namenode
+      - hadoop-datanode
+      - spark-master
 
 networks:
   privnet:

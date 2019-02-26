@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.5.5
+FROM aiurtech/hadoop-base:0.5.6
 
 ENV HIVE_HOME=$VIRGO_HOME/apache-hive-$HIVE_VERSION
 ENV PATH $HIVE_HOME/bin:$PATH
@@ -22,7 +22,7 @@ RUN mkdir -p /usr/share/man/man1 \
 
 EXPOSE 9083
 
-HEALTHCHECK --interval=2m --timeout=15s --start-period=30s \ 
+HEALTHCHECK --interval=1m --timeout=15s --start-period=30s \ 
     CMD nc -vz hive-metastore 9083 && [[ -f $VIRGO_HOME/initialized ]] || exit 1
 
 COPY --chown=virgo:hadoop run.sh $VIRGO_HOME/run.sh

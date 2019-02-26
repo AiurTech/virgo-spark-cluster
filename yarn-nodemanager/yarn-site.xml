@@ -10,6 +10,14 @@
     <name>yarn.resourcemanager.hostname</name>
     <value>yarn-resourcemanager</value>
 </property>
+  <property>
+      <name>yarn.nodemanager.bind-host</name>
+      <value>yarn-nodemanager</value>
+  </property>
+  <property>
+      <name>yarn.nodemanager.hostname</name>
+      <value>yarn-nodemanager</value>
+  </property>
  <property>
     <name>yarn.scheduler.minimum-allocation-mb</name>
     <value>1024</value>

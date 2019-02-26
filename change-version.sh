@@ -7,7 +7,8 @@ OLD_VERSION=$1
 source config.sh
 echo "Changing from $OLD_VERSION to $VERSION"
 find . -name Dockerfile -type f -exec sed -i "s/${OLD_VERSION}/${VERSION}/g" {} \;
+sed -i "s/${OLD_VERSION}/${VERSION}/g" docker-compose.yml
 
 echo "Changes:"
 find . -name Dockerfile | xargs grep $VERSION
-
+grep $VERSION docker-compose.yml

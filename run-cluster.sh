@@ -10,6 +10,7 @@ docker run -d --name hadoop-namenode -h hadoop-namenode --net $NETWORK_NAME \
 	-p 8020:8020 -p 50070:50070 \
 	$REPO/hadoop-namenode:$CLUSTER_VERSION
 docker run -d --name hadoop-datanode -h hadoop-datanode --net $NETWORK_NAME \
+	-p 50010:50010 \
 	-p 50075:50075 \
 	--link hadoop-namenode:hadoop-namenode \
 	$REPO/hadoop-datanode:$CLUSTER_VERSION
@@ -97,7 +98,9 @@ function check() {
 
 source virgo-base/coordinator.sh
 
-wait_for_dependencies "virgo" "hadoop-namenode:8020 hadoop-datanode:50075 spark-master:9090 hive-metastore:9083"
+declare -a dependencies=(hadoop-namenode:8020 hadoop-datanode:50075 hive-metastore:9083 spark-master:9090)
+
+wait_for_dependencies "virgo" "${dependencies[*]}"
 
 function is_ready() {
 	local container="$1"
