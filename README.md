@@ -1,13 +1,17 @@
 # Virgo Spark Cluster :sparkles: :eight_spoked_asterisk: :dizzy:
 
-Simplifies testing of Spark 2.2 application, this cluster setup focuses primarily on Spark with Hive integration.
+Simplifies building and testing applications using Spark 2.2+. 
+This cluster setup focuses primarily on Spark with Hive integration.
 
-Main features: Spark with Hive Metastore, Hive, YARN and Spark History server.
+Components: 
+  * Spark with external Hive Metastore 
+  * YARN
+  * Hive (1.2.2, same version as required by Spark)
+  * Spark History server
 
 The cluster is integrated in such a way that it correctly handles all dependencies and it's expected to work correctly out of the box. 
 
 The main benefits of this small cluster is that it's easy to configure to run integration tests with YARN cluster support on your own machine.
-
 
 | Virgo cluster | Hadoop   | Spark  | Hive  | Postgres |
 | ------------- |:--------:| ------:|-------|----------|
@@ -25,6 +29,18 @@ or
 docker-compose up -d
 ```
 
+To stop the cluster:
+
+```bash
+./stop-cluster.sh
+```
+
+or
+
+```bash
+docker-compose down
+```
+
 The folder virgo-client contains several useful clients to test the cluster:
 
   * Spark Submit with YARN cluster mode
@@ -37,10 +53,11 @@ Advantages:
   * The docker images are just over 1 GB vs 21 GB for HDP. They reuse base images extensively.
   * Simple to use docker images. No special docker privileges required
   * Focus on ease of use versus a large set of components
-  * It offers 10 components in independent images, which makes debugging easier.
+  * Full micro-services stack: It offers 10 components in independent images, which makes debugging easier.
   * Requires a minimum of 2GB of RAM to run all containers. This is significantly less than the 10 GB required by HDP.
   * "Fast" startup time, it can boot up fully in under 2 minutes, which is several times faster than full distros.
   * Completely based on Spark, not on Hadoop
+  * Aims to support Kubernetes deployment soon.
 
 Disadvantages:
   * It aims to provide a realistic cluster setup for development phase, not to substitute a full production cluster distribution.
@@ -61,3 +78,12 @@ Furthermore, the images are no longer supported.
 ## Commercial support available
 
 Please contact Aiur Tech [cto@aiur.co.uk]
+
+## FAQ
+
+### Why the name Virgo?
+
+The [Virgo Cluster](https://en.wikipedia.org/wiki/Virgo_Cluster) is a "neighbouring" star cluster. 
+It has some beatiful components like Messier 87 [https://www.messier-objects.com/messier-87-virgo-a/]
+and in particular, the [M91 Barred Spiral Galaxy](http://www.messier-objects.com/wp-content/uploads/2015/08/Messier-91.jpg). 
+[M91](https://www.messier-objects.com/messier-91/)
