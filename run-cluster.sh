@@ -111,6 +111,7 @@ function is_ready() {
 
 	for i in {1..10}; do
 		check $container "$expr"
+		
 		if [[ $? == 1 ]]; then
 			sleep $wait_time
 		else
