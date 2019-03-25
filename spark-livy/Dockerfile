@@ -1,4 +1,4 @@
-FROM aiurtech/spark-base:0.6.0
+FROM aiurtech/spark-base:0.6.1
 
 ENV LIVY_VERSION "0.4.0-incubating"
 ENV LIVY_SERVER_PORT 8998
@@ -21,6 +21,7 @@ HEALTHCHECK CMD curl -f http://spark-livy:8998/ || exit 1
 
 COPY --chown=virgo:hadoop livy.conf $LIVY_HOME/conf/livy.conf
 
+COPY --chown=virgo:hadoop setup.sh $VIRGO_HOME/setup.sh
 COPY --chown=virgo:hadoop run.sh $VIRGO_HOME/run.sh
 
 USER virgo

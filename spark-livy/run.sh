@@ -7,6 +7,10 @@ source $VIRGO_HOME/coordinator.sh
 
 wait_for_dependencies "spark-livy" "${dependencies[*]}"
 
+$VIRGO_HOME/setup.sh
+
+echo "[Start] $(timestamp)"
+
 ln -sf /dev/stdout $LIVY_HOME/logs/livy.out
 
 echo "Starting Spark Livy Server on port $LIVY_SERVER_PORT..."

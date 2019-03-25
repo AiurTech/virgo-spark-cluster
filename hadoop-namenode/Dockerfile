@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.6.0
+FROM aiurtech/hadoop-base:0.6.1
 
 RUN mkdir -p /hadoop/namenode && chown -R virgo:hadoop /hadoop/namenode
 
