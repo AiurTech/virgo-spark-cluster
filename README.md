@@ -20,7 +20,7 @@ The main benefits of this small cluster is that it's easy to configure to run in
 
 | Virgo cluster | Hadoop   | Spark  | Hive  | Postgres | Livy |
 | ------------- |:--------:| ------:|-------|----------|------|
-| 0.6.1         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | 0.4  |
+| 0.6.2         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | 0.4  |
 | 0.5.7         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      |      |  
 
 ## Use :sparkles: :eight_spoked_asterisk: :dizzy:
