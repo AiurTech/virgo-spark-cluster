@@ -20,7 +20,8 @@ The main benefits of this small cluster is that it's easy to configure to run in
 
 | Virgo cluster | Hadoop   | Spark  | Hive  | Postgres | Livy |
 | ------------- |:--------:| ------:|-------|----------|------|
-| 0.6.2         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | 0.4  |
+| 0.7.0         | 2.7.7    | *2.3.3*  | 1.2.2 | 9.5    | 0.4  |
+| 0.6.2         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | *0.4* |
 | 0.5.7         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      |      |  
 
 ## Use :sparkles: :eight_spoked_asterisk: :dizzy:
@@ -54,6 +55,7 @@ The folder virgo-client contains several useful clients to test the cluster:
 * Spark Submit with YARN cluster mode
 * Spark Submit with YARN client mode
 * Remote Spark Shell via YARN master
+* Remote Hive Beeline Shell
 
 ## Comparison with other commercial distributions:
 
@@ -71,7 +73,7 @@ Advantages:
 Disadvantages
 
 * It aims to provide a realistic cluster setup for development phase, not to substitute a full production cluster distribution.
-* Whilst security can be added, is not the main focus.
+* Whilst security can be added, is not the main focus at this point.
 * No admin console
 
 ### Full Distros
@@ -83,7 +85,7 @@ Whilst there are several commercial full distributions which offer a fully manag
 
 This project started as an attempt to use the images kindly provided by the [Big Data Europe 2020 Project](https://hub.docker.com/u/bde2020).
 However, we've found the images not suitable since they did not integrate Spark with Hive correctly.
-Furthermore, the images are no longer supported.
+Furthermore, those images are no longer supported.
 
 ## Commercial support available
 
@@ -96,6 +98,8 @@ Please contact Aiur Tech [cto @ aiur.co.uk]
 The [Virgo Cluster](https://en.wikipedia.org/wiki/Virgo_Cluster) is a "neighbouring" star cluster. 
 It has some beatiful members:
 
-* Messier 87 [https://www.messier-objects.com/messier-87-virgo-a/]
+* [Messier 87](https://www.messier-objects.com/messier-87-virgo-a/)
 * [M91 Barred Spiral Galaxy](http://www.messier-objects.com/wp-content/uploads/2015/08/Messier-91.jpg) -
-[M91](https://www.messier-objects.com/messier-91/)
+*  [M91](https://www.messier-objects.com/messier-91/)
+
+Interestingly enough, soon after this project was created, [the first ever picture of a black hole emerged](https://www.bbc.co.uk/news/science-environment-47873592), which was no other than M87 :smiley:
