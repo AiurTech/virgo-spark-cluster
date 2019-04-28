@@ -1,16 +1,23 @@
 
 export YARN_CONF_DIR="$(pwd)"
 
-SPARK_VERSION=2.2.3
+SPARK_VERSION=2.3.3
 
 DEPLOY_MODE=${1:-cluster}
 export HADOOP_USER_NAME=${2:-virgo}
 
-if [[ $(spark-submit --version 2> out) && $(cat out | grep -o $SPARK_VERSION out | head -n 1) != $SPARK_VESRION ]]; then  
-	echo "Wrong Version for Spark binaries. Expected Spark version: $SPARK_VERSION"; 
-else 
-	echo "using SPARK $SPARK_VERSION"; 
+SPARK_VERSION_FOUND=$(spark-submit --version 2>&1 | grep --line-buffered -o "$SPARK_VERSION" | uniq)
+
+if [[ "$SPARK_VERSION_FOUND" != $SPARK_VERSION ]]; then
+        echo "Wrong Version for Spark binaries. Expected Spark version: $SPARK_VERSION, but using:";
+        echo "$(spark-submit --version)"
+        echo "Spark home: $SPARK_HOME"
+        echo "Spark is: $(whereis spark-submit)"
+	exit -1
+else
+        echo "using SPARK $SPARK_VERSION";
 fi
+
 
 NAMENODE=hdfs://hadoop-namenode:8020
 echo "Submitting job as YARN $DEPLOY_MODE to $NAMENODE"
@@ -31,7 +38,7 @@ $SPARK_HOME/bin/spark-submit \
   --conf "spark.history.fs.logDirectory=hdfs://hadoop-namenode:8020/logs/spark" \
   --conf spark.yarn.am.extraJavaOptions="-XX:ReservedCodeCacheSize=100M -XX:MaxMetaspaceSize=256m -XX:CompressedClassSpaceSize=256m" \
   --class org.apache.spark.examples.SparkPi \
-  $NAMENODE/apps/spark-examples_2.11-2.2.3.jar \
+  $NAMENODE/apps/spark-examples_2.11-${SPARK_VERSION}.jar \
 100
 
 else 
@@ -59,7 +66,7 @@ $SPARK_HOME/bin/spark-submit \
   --conf "spark.yarn.historyServer.address=http://spark-historyserver:18080" \
   --conf spark.driver.extraJavaOptions="-XX:ReservedCodeCacheSize=100M -XX:MaxMetaspaceSize=256m -XX:CompressedClassSpaceSize=256m" \
   --class org.apache.spark.examples.SparkPi \
-  $NAMENODE/apps/spark-examples_2.11-2.2.3.jar \
+  $NAMENODE/apps/spark-examples_2.11-${SPARK_VERSION}.jar \
 100
 
 fi 
