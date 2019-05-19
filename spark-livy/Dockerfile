@@ -1,4 +1,4 @@
-FROM aiurtech/spark-base:0.7.0
+FROM aiurtech/spark-base:0.7.1
 
 ENV LIVY_VERSION "0.4.0-incubating"
 ENV LIVY_SERVER_PORT 8998

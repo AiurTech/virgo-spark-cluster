@@ -16,6 +16,8 @@ if [[ "$CMD" == "ls" ]]; then
  declare -a run=("-ls" "$ARG1")
 elif [[ "$CMD" == "copyFromLocal" ]]; then
  declare -a run=("-copyFromLocal" "$ARG1" "${NAMENODE}$ARG2")
+elif [[ "$CMD" == "rm" ]]; then
+ declare -a run=("-rm" "-skipTrash" "$ARG1")
 else
  echo "Wrong command: $1 $2 $3"
  exit -1
