@@ -17,7 +17,7 @@ COPY hive-site.xml $HADOOP_CONF_DIR/hive-site.xml
 RUN mkdir -p /usr/share/man/man1 \
 && mkdir -p /usr/share/man/man7 \
 && apt-get update \
-&& apt-get install --no-install-recommends --no-install-suggests -y apt-utils postgresql-client-9.6 \
+&& apt-get install --no-install-recommends --no-install-suggests -y apt-utils postgresql-client-11 \
 && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 9083
