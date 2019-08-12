@@ -13,5 +13,6 @@ target
 .history
 
 # VS Code
+.vscode
 .bloop
-.metals
+.metals/

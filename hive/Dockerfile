@@ -1,4 +1,4 @@
-FROM aiurtech/hive-metastore:0.7.1
+FROM aiurtech/hive-metastore:0.7.4
 
 EXPOSE 10001
 

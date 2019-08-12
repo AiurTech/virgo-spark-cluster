@@ -12,4 +12,4 @@ hdfs dfs -mkdir -p /logs/spark
 ln -sf /dev/stdout $SPARK_HOME/logs/spark-historyserver.out
 
 echo "Starting Spark History Server on UI port $SPARK_HISTORYSERVER_UI_PORT..."
-spark-class org.apache.spark.deploy.history.HistoryServer >> $SPARK_HOME/logs/spark-historyserver.out
+spark-class $JVM_DOCKER_OPTS org.apache.spark.deploy.history.HistoryServer >> $SPARK_HOME/logs/spark-historyserver.out
