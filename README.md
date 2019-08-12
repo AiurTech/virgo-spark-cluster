@@ -1,6 +1,6 @@
 # Virgo Spark Cluster
 
-Simplifies building and testing applications using Spark 2.2+.
+Simplifies building and testing applications using Spark 2.3+.
 This cluster setup focuses primarily on Spark with Hive integration.
 
 ## Components  
@@ -8,7 +8,7 @@ This cluster setup focuses primarily on Spark with Hive integration.
 * Spark with external Hive Metastore (Postgres)
 * YARN
 * HDFS
-* Hive (1.2.2, same version as required by Spark)
+* Hive (same version as required by Spark)
 * Spark History Server
 * Livy (by default in YARN mode)
 
@@ -20,7 +20,7 @@ The main benefits of this small cluster is that it's easy to configure to run in
 
 | Virgo cluster | Hadoop   | Spark  | Hive  | Postgres | Livy |
 | ------------- |:--------:| ------:|-------|----------|------|
-| 0.7.0         | 2.7.7    | *2.3.3*  | 1.2.2 | 9.5    | 0.4  |
+| 0.7.0         | 2.7.7    | *2.3.0*  | 1.2.2 | 9.5    | 0.4  |
 | 0.6.2         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | *0.4* |
 | 0.5.7         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      |      |  
 

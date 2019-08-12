@@ -1,4 +1,4 @@
-FROM aiurtech/virgo-base:0.7.1
+FROM aiurtech/virgo-base:0.7.4
 
 RUN adduser --system virgo
 RUN groupadd hadoop
@@ -8,6 +8,8 @@ RUN chown virgo:hadoop ${VIRGO_HOME}
 
 ENV HADOOP_HOME=$VIRGO_HOME/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=/etc/hadoop
+ENV JVM_DOCKER_OPTS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1"
+ENV HADOOP_OPTS="${JVM_DOCKER_OPTS}"
 
 RUN mkdir -p ${HADOOP_CONF_DIR}
 
@@ -17,6 +19,7 @@ RUN set -x \
     && rm -rf $HADOOP_HOME/share/doc \
     && mkdir -p ${HADOOP_HOME}/logs \
     && chown -R virgo:hadoop $HADOOP_HOME \
+    && cp $HADOOP_HOME/etc/hadoop/hadoop-env.sh $HADOOP_CONF_DIR \
     && cp $HADOOP_HOME/etc/hadoop/log4j.properties $HADOOP_CONF_DIR \
     && cp $HADOOP_HOME/etc/hadoop/yarn-env.sh $HADOOP_CONF_DIR \
     && chown -R virgo:hadoop $HADOOP_CONF_DIR \
