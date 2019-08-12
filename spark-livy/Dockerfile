@@ -8,6 +8,8 @@ EXPOSE 8998
 
 RUN set -x \
     && curl -fSL "http://archive.apache.org/dist/incubator/livy/${LIVY_VERSION}/livy-${LIVY_VERSION}-bin.zip" -o /tmp/livy.zip \    
+    && apt-get update \
+    && apt-get install --no-install-recommends --no-install-suggests -y unzip \
     && unzip /tmp/livy.zip -d ${VIRGO_HOME} \
     && ln -s $VIRGO_HOME/livy-${LIVY_VERSION}-bin $LIVY_HOME \
     && mkdir -p ${LIVY_HOME}/logs \
