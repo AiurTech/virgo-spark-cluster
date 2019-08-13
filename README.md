@@ -10,7 +10,6 @@ This cluster setup focuses primarily on Spark with Hive integration.
 * HDFS
 * Hive (same version as required by Spark)
 * Spark History Server
-* Livy (by default in YARN mode)
 
 The cluster is integrated in such a way that it correctly handles all dependencies and it's expected to work correctly out of the box.
 
@@ -18,36 +17,37 @@ The main benefits of this small cluster is that it's easy to configure to run in
 
 ## Versions
 
-| Virgo cluster | Hadoop   | Spark  | Hive  | Postgres | Livy |
-| ------------- |:--------:| ------:|-------|----------|------|
-| 0.7.0         | 2.7.7    | *2.3.0*  | 1.2.2 | 9.5    | 0.4  |
-| 0.6.2         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | *0.4* |
-| 0.5.7         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      |      |  
+| Virgo cluster | Hadoop   | Spark  | Hive  | Postgres | Livy     |
+| ------------- |:--------:| ------:|-------|----------|----------|
+| 0.7.5         | 2.7.7    | *2.3.0*  | 1.2.2 | 9.5    | Moved    |
+| 0.7.0         | 2.7.7    | *2.3.0*  | 1.2.2 | 9.5    | 0.4      |
+| 0.6.2         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | *0.4*    |
+| 0.5.7         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      |          |  
 
 ## Use :sparkles: :eight_spoked_asterisk: :dizzy:
 
 To use, clone this repo, and use any of two forms:
 
-```bash
-./run-cluster.sh
-```
-
-or
 
 ```bash
 docker-compose up -d
 ```
 
+or just Docker:
+
+```bash
+./run-cluster.sh
+```
+
 To stop the cluster:
 
 ```bash
-./stop-cluster.sh
+docker-compose down
 ```
-
-or
+or Just docker
 
 ```bash
-docker-compose down
+./stop-cluster.sh
 ```
 
 The folder virgo-client contains several useful clients to test the cluster:
@@ -66,8 +66,9 @@ Advantages:
 * Focus on ease of use versus a large set of components
 * Full micro-services stack: It offers 10 components in independent images, which makes debugging easier.
 * Requires a minimum of 2GB of RAM to run all containers. This is significantly less than the 10 GB required by HDP.
+* Limits itself to a maximum of 8 GB of RAM (total size of all containers)
 * "Fast" startup time, it can boot up fully in under 2 minutes, which is several times faster than full distros.
-* Completely based on Spark, not on Hadoop
+* Biased towards Spark, instead of Hadoop
 * Aims to support Kubernetes deployment soon.
 
 Disadvantages
