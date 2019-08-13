@@ -80,16 +80,6 @@ docker run -d --name spark-worker -h spark-worker --net $NETWORK_NAME \
 	--link spark-historyserver:spark-historyserver \
 	$REPO/spark-worker:$CLUSTER_VERSION
 
-echo "Starting Spark Livy .."
-docker run -d --name spark-livy -h spark-livy --net $NETWORK_NAME \
-	-p 8998:8998 \
-	--link hadoop-namenode:hadoop-namenode \
-	--link hadoop-datanode:hadoop-datanode \
-	--link yarn-resourcemanager:yarn-resourcemanager \
-	--link yarn-nodemanager:yarn-nodemanager \
-	--link spark-master:spark-master \
-	$REPO/spark-livy:$CLUSTER_VERSION
-
 echo "Virgo Cluster Starting..."
 echo -e "\033[1;36m$(cat virgo.sh)\033[0m"
 
