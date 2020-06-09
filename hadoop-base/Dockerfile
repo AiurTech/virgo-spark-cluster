@@ -1,4 +1,4 @@
-FROM aiurtech/virgo-base:0.7.5
+FROM aiurtech/virgo-base:0.8.1
 
 RUN adduser --system virgo
 RUN groupadd hadoop
@@ -8,8 +8,7 @@ RUN chown virgo:hadoop ${VIRGO_HOME}
 
 ENV HADOOP_HOME=$VIRGO_HOME/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=/etc/hadoop
-ENV JVM_DOCKER_OPTS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1"
-ENV HADOOP_OPTS="${JVM_DOCKER_OPTS}"
+ENV HADOOP_OPTS="${VIRGO_JVM_DOCKER_OPTS}"
 
 RUN mkdir -p ${HADOOP_CONF_DIR}
 
