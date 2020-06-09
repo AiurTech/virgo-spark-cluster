@@ -1,4 +1,4 @@
-FROM aiurtech/virgo-base:0.8.1
+FROM aiurtech/virgo-base:0.8.2
 
 RUN adduser --system virgo
 RUN groupadd hadoop

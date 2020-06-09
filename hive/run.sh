@@ -16,7 +16,7 @@ touch /tmp/virgo/hive.log
 ln -sf /dev/stdout /tmp/virgo/hive.log
 
 function validateHive() {
-    psql -U hive -h hive-metastore-postgresql -d metastore -t -c 'select * from "VERSION"' 2> /dev/null | wc -l
+    PGPASSWORD=hive psql -U hive -h hive-metastore-postgresql -d metastore -t -c 'select * from "VERSION"' 2> /dev/null | wc -l
 }
 
 echo "Waiting for Hive metastore to initialize schema"

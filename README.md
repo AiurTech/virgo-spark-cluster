@@ -19,6 +19,7 @@ The main benefits of this small cluster is that it's easy to configure to run in
 
 | Virgo cluster | Hadoop   | Spark  | Hive  | Postgres | Livy     |
 | ------------- |:--------:| ------:|-------|----------|----------|
+| 0.8.2         | 2.7.7    | *2.3.0*  | 1.2.2 | 11     | Moved    |
 | 0.7.5         | 2.7.7    | *2.3.0*  | 1.2.2 | 9.5    | Moved    |
 | 0.7.0         | 2.7.7    | *2.3.0*  | 1.2.2 | 9.5    | 0.4      |
 | 0.6.2         | 2.7.7    | 2.2.3  | 1.2.2 | 9.5      | *0.4*    |

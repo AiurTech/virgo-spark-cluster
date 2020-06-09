@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hive-metastore
+spec:
+  selector:
+    app: hive-metastore
+  ports:
+    - name: "hive-ms-port"
+      port: 9083
+      targetPort: 9083

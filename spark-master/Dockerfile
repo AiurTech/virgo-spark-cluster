@@ -1,4 +1,4 @@
-FROM aiurtech/spark-base:0.8.1
+FROM aiurtech/spark-base:0.8.2
 
 ENV SPARK_MASTER_UI_PORT 9090
 

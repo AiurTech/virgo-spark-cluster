@@ -2,7 +2,7 @@ FROM openjdk:8-jdk-slim-buster
 
 LABEL maintainer "Aiur Tech <cto+docker@aiurtech.co.uk>"
 
-ARG VIRGO_DIST_VERSION=0.8.1
+ARG VIRGO_DIST_VERSION=0.8.2
 ENV VIRGO_VERSION ${VIRGO_DIST_VERSION}
 ENV HADOOP_VERSION 2.7.7
 ENV HIVE_VERSION 1.2.2
