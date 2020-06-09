@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hive-metastore
+  labels:
+    app: hive-metastore
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: hive-metastore
+  template:
+    metadata:
+      labels:
+        app: hive-metastore
+    spec:    
+      containers:
+      - name: hive-metastore
+        image: aiurtech/hive-metastore:0.8.2
+        ports:
+        - containerPort: 9083
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "600Mi"
+            cpu: "1000m"
+      hostname: hive-metastore
+      restartPolicy: Always
+ 

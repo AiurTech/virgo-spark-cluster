@@ -9,6 +9,9 @@ echo "Changing from $OLD_VERSION to $VERSION"
 find . -name Dockerfile -type f -exec sed -i "s/${OLD_VERSION}/${VERSION}/g" {} \;
 sed -i "s/${OLD_VERSION}/${VERSION}/g" docker-compose.yml
 
+# YAMLs
+find "k8s/" -name "*.yaml" -type f -exec sed -i "s/${OLD_VERSION}/${VERSION}/g" {} \;
+
 echo "Changes:"
 find . -name Dockerfile | xargs grep $VERSION
 grep $VERSION docker-compose.yml

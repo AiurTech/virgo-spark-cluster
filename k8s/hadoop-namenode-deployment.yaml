@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hadoop-namenode
+  labels:
+    app: hadoop-namenode
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: hadoop-namenode
+  template:
+    metadata:
+      labels:
+        app: hadoop-namenode
+    spec:    
+      containers:
+      - name: hadoop-namenode
+        image: aiurtech/hadoop-namenode:0.8.2
+        ports:
+        - containerPort: 8020
+        - containerPort: 50070
+        resources:
+          requests:
+            memory: "300Mi"
+            cpu: "250m"
+          limits:
+            memory: "500Mi"
+            cpu: "500m"
+      hostname: hadoop-namenode
+      restartPolicy: Always

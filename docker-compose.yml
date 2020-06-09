@@ -1,9 +1,9 @@
-version: '2.4'
+version: '2'
 
 services:
   hadoop-namenode:
     container_name: hadoop-namenode
-    image: 'aiurtech/hadoop-namenode:0.8.1'
+    image: 'aiurtech/hadoop-namenode:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.2
@@ -13,12 +13,12 @@ services:
     - 8020:8020
     - 50070:50070
     hostname: hadoop-namenode
-    cpus: '2'
+    # cpus: '2'
     mem_limit: 500m
     mem_reservation: 300m
   hadoop-datanode:
     container_name: hadoop-datanode
-    image: 'aiurtech/hadoop-datanode:0.8.1'
+    image: 'aiurtech/hadoop-datanode:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.20
@@ -28,14 +28,14 @@ services:
     - 50010:50010  
     - 50075:50075
     hostname: hadoop-datanode
-    cpus: '2'
+    #cpus: '2'
     mem_limit: 600m
     mem_reservation: 300m
     depends_on:
     - hadoop-namenode
   yarn-resourcemanager:
     container_name: yarn-resourcemanager
-    image: 'aiurtech/yarn-resourcemanager:0.8.1'
+    image: 'aiurtech/yarn-resourcemanager:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.3
@@ -46,12 +46,12 @@ services:
     - 8033:8033
     - 8088:8088
     hostname: yarn-resourcemanager
-    cpus: '2'
+    # cpus: '2'
     mem_limit: 500m
     mem_reservation: 300m
   yarn-nodemanager:
     container_name: yarn-nodemanager
-    image: 'aiurtech/yarn-nodemanager:0.8.1'
+    image: 'aiurtech/yarn-nodemanager:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.4
@@ -64,40 +64,40 @@ services:
       - yarn-resourcemanager
   hive-metastore-postgresql:
     container_name: hive-metastore-postgresql
-    image: 'aiurtech/hive-metastore-postgresql:0.8.1'
+    image: 'aiurtech/hive-metastore-postgresql:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.5
     ports:
     - 5432:5432
     hostname: hive-metastore-postgresql
-    cpus: '2'
+    # cpus: '2'
     mem_limit: 500m
     mem_reservation: 300m
   hive-metastore:
     container_name: hive-metastore
-    image: 'aiurtech/hive-metastore:0.8.1'
+    image: 'aiurtech/hive-metastore:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.10
     ports:
     - 9083:9083
     hostname: hive-metastore
-    cpus: '2'
+    # cpus: '2'
     mem_limit: 600m
     mem_reservation: 300m
     depends_on:
       - hive-metastore-postgresql
   hive:
     container_name: hive
-    image: 'aiurtech/hive:0.8.1'
+    image: 'aiurtech/hive:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.11
     ports:
     - 10001:10001
     hostname: hive
-    cpus: '2'
+    # cpus: '2'
     mem_limit: 1000m
     mem_reservation: 300m
     depends_on:
@@ -107,7 +107,7 @@ services:
       - spark-master
   spark-master:
     container_name: spark-master
-    image: 'aiurtech/spark-master:0.8.1'
+    image: 'aiurtech/spark-master:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.30
@@ -116,7 +116,7 @@ services:
     - 7077:7077
     - 9090:9090
     hostname: spark-master
-    cpus: '2'
+    # cpus: '2'
     mem_limit: 600m
     mem_reservation: 300m
     depends_on:
@@ -126,14 +126,14 @@ services:
       - hive-metastore
   spark-historyserver:
     container_name: spark-historyserver
-    image: 'aiurtech/spark-historyserver:0.8.1'
+    image: 'aiurtech/spark-historyserver:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.31
     ports:
     - 18080:18080
     hostname: spark-historyserver
-    cpus: '0.50'
+    # cpus: '0.50'
     mem_limit: 500m
     mem_reservation: 300m
     depends_on:
@@ -142,14 +142,14 @@ services:
       - spark-master
   spark-worker:
     container_name: spark-worker
-    image: 'aiurtech/spark-worker:0.8.1'
+    image: 'aiurtech/spark-worker:0.8.2'
     networks:
       privnet:
         ipv4_address: 172.15.0.40
     ports:
     - 8081:8081
     hostname: spark-worker
-    cpus: '4'
+    # cpus: '4'
     mem_limit: 2000m
     mem_reservation: 500m
     depends_on:

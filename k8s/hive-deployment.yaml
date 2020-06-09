@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hive
+  labels:
+    app: hive
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: hive
+  template:
+    metadata:
+      labels:
+        app: hive
+    spec:    
+      containers:
+      - name: hive
+        image: aiurtech/hive:0.8.2
+        ports:
+        - containerPort: 10001
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "600Mi"
+            cpu: "1000m"
+      hostname: hive
+      restartPolicy: Always

@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.8.1
+FROM aiurtech/hadoop-base:0.7.5
 
 ENV SPARK_HOME=$VIRGO_HOME/spark-$SPARK_VERSION
 
@@ -7,7 +7,7 @@ RUN set -x \
     && tar -xf /tmp/spark.tgz -C $VIRGO_HOME \
     && mv $VIRGO_HOME/spark-${SPARK_VERSION}-bin-hadoop2.7 $SPARK_HOME \
     && mkdir -p $SPARK_HOME/logs \
-    && curl -fSL https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar -o $SPARK_HOME/jars/postgresql-9.4.1212.jar \
+    && curl -fSL https://jdbc.postgresql.org/download/postgresql-42.2.13.jar -o $SPARK_HOME/jars/postgresql-9.4.1212.jar \
     && chown -R virgo:hadoop $SPARK_HOME \
     && rm /tmp/spark.tgz*
 

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hadoop-datanode
+  labels:
+    app: hadoop-datanode
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: hadoop-datanode
+  template:
+    metadata:
+      labels:
+        app: hadoop-datanode
+    spec:    
+      containers:
+      - name: hadoop-datanode
+        image: aiurtech/hadoop-datanode:0.8.2
+        ports:
+        - containerPort: 50010
+        - containerPort: 50020
+        - containerPort: 50075
+        resources:
+          requests:
+            memory: "300Mi"
+            cpu: "500m"
+          limits:
+            memory: "500Mi"
+            cpu: "2000m"
+      hostname: hadoop-datanode
+      restartPolicy: Always

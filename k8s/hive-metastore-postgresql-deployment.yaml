@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hive-metastore-postgresql
+  labels:
+    app: hive-metastore-postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: hive-metastore-postgresql
+  template:
+    metadata:
+      labels:
+        app: hive-metastore-postgresql
+    spec:    
+      containers:
+      - name: hive-metastore-postgresql
+        image: aiurtech/hive-metastore-postgresql:0.8.2
+        ports:
+        - containerPort: 5432
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1000m"
+      hostname: hive-metastore-postgresql
+      restartPolicy: Always
