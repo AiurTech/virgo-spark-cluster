@@ -3,7 +3,7 @@ version: '2.4'
 services:
   hadoop-namenode:
     container_name: hadoop-namenode
-    image: 'aiurtech/hadoop-namenode:0.7.5'
+    image: 'aiurtech/hadoop-namenode:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.2
@@ -18,7 +18,7 @@ services:
     mem_reservation: 300m
   hadoop-datanode:
     container_name: hadoop-datanode
-    image: 'aiurtech/hadoop-datanode:0.7.5'
+    image: 'aiurtech/hadoop-datanode:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.20
@@ -35,7 +35,7 @@ services:
     - hadoop-namenode
   yarn-resourcemanager:
     container_name: yarn-resourcemanager
-    image: 'aiurtech/yarn-resourcemanager:0.7.5'
+    image: 'aiurtech/yarn-resourcemanager:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.3
@@ -51,20 +51,20 @@ services:
     mem_reservation: 300m
   yarn-nodemanager:
     container_name: yarn-nodemanager
-    image: 'aiurtech/yarn-nodemanager:0.7.5'
+    image: 'aiurtech/yarn-nodemanager:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.4
     ports:
     - 8042:8042
     hostname: yarn-nodemanager
-    mem_limit: 1200m
+    mem_limit: 2400m
     mem_reservation: 300m
     depends_on:
       - yarn-resourcemanager
   hive-metastore-postgresql:
     container_name: hive-metastore-postgresql
-    image: 'aiurtech/hive-metastore-postgresql:0.7.5'
+    image: 'aiurtech/hive-metastore-postgresql:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.5
@@ -76,7 +76,7 @@ services:
     mem_reservation: 300m
   hive-metastore:
     container_name: hive-metastore
-    image: 'aiurtech/hive-metastore:0.7.5'
+    image: 'aiurtech/hive-metastore:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.10
@@ -90,7 +90,7 @@ services:
       - hive-metastore-postgresql
   hive:
     container_name: hive
-    image: 'aiurtech/hive:0.7.5'
+    image: 'aiurtech/hive:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.11
@@ -107,7 +107,7 @@ services:
       - spark-master
   spark-master:
     container_name: spark-master
-    image: 'aiurtech/spark-master:0.7.5'
+    image: 'aiurtech/spark-master:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.30
@@ -126,7 +126,7 @@ services:
       - hive-metastore
   spark-historyserver:
     container_name: spark-historyserver
-    image: 'aiurtech/spark-historyserver:0.7.5'
+    image: 'aiurtech/spark-historyserver:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.31
@@ -142,7 +142,7 @@ services:
       - spark-master
   spark-worker:
     container_name: spark-worker
-    image: 'aiurtech/spark-worker:0.7.5'
+    image: 'aiurtech/spark-worker:0.8.1'
     networks:
       privnet:
         ipv4_address: 172.15.0.40

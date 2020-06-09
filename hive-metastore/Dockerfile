@@ -1,4 +1,4 @@
-FROM aiurtech/hadoop-base:0.7.5
+FROM aiurtech/hadoop-base:0.8.1
 
 ENV HIVE_HOME=$VIRGO_HOME/apache-hive-$HIVE_VERSION
 ENV PATH $HIVE_HOME/bin:$PATH
@@ -7,7 +7,7 @@ RUN set -x \
     && curl -fSL "https://www-eu.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz" -o /tmp/apache-hive-$HIVE_VERSION-bin.tar.gz \    
     && tar -xf /tmp/apache-hive-$HIVE_VERSION-bin.tar.gz -C $VIRGO_HOME \
     && mv $VIRGO_HOME/apache-hive-$HIVE_VERSION-bin ${HIVE_HOME} \
-    && curl -fSL https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar -o $HIVE_HOME/lib/postgresql-9.4.1212.jar \
+    && curl -fSL https://jdbc.postgresql.org/download/postgresql-42.2.13.jar -o $HIVE_HOME/lib/postgresql-9.4.1212.jar \
     && chown -R virgo:hadoop $HIVE_HOME \
     && rm /tmp/apache-hive-$HIVE_VERSION-bin.tar.gz*
 
