@@ -14,6 +14,10 @@
         <name>dfs.namenode.name.dir</name>
         <value>/hadoop/namenode</value>
     </property>
+  <property>
+     <name>dfs.permissions.superusergroup</name>
+     <value>hadoop</value>
+  </property>
     <property>
         <name>fs.permissions.umask-mode</name>
         <value>0000</value>

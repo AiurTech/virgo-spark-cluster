@@ -1,4 +1,4 @@
-FROM aiurtech/spark-base:0.8.2
+FROM aiurtech/spark-base:0.8.3
 
 ENV SPARK_HISTORYSERVER_UI_PORT 18080
 

@@ -6,6 +6,10 @@
      <name>fs.defaultFS</name>
      <value>hdfs://hadoop-namenode:8020</value>
   </property>
+  <property>
+     <name>dfs.permissions.superusergroup</name>
+     <value>hadoop</value>
+  </property>
  <!-- <property>
      <name>dfs.data.dir</name>
      <value>/mnt/hadoop/datanode</value>

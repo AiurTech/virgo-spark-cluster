@@ -36,7 +36,7 @@ spec:
     spec:    
       containers:
       - name: hive-metastore-postgresql
-        image: aiurtech/hive-metastore-postgresql:0.8.2
+        image: aiurtech/hive-metastore-postgresql:0.8.3
         ports:
         - containerPort: 5432
         resources:

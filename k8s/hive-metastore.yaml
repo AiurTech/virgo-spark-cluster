@@ -36,7 +36,7 @@ spec:
     spec:    
       containers:
       - name: hive-metastore
-        image: aiurtech/hive-metastore:0.8.2
+        image: aiurtech/hive-metastore:0.8.3
         ports:
         - containerPort: 9083
         resources:

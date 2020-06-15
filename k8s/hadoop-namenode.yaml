@@ -38,7 +38,7 @@ spec:
     spec:    
       containers:
       - name: hadoop-namenode
-        image: aiurtech/hadoop-namenode:0.8.2
+        image: aiurtech/hadoop-namenode:0.8.3
         ports:
         - containerPort: 8020
         - containerPort: 50070
