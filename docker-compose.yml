@@ -10,7 +10,7 @@ services:
     #volumes:
     #- namenode:/hadoop/dfs/name
     ports:
-    - 8020.8.30
+    - 8020:8020
     - 50070:50070
     hostname: hadoop-namenode
     # cpus: '2'
