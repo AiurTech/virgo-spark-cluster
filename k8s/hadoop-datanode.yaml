@@ -40,7 +40,7 @@ spec:
     spec:    
       containers:
       - name: hadoop-datanode
-        image: aiurtech/hadoop-datanode:0.8.2
+        image: aiurtech/hadoop-datanode:0.8.3
         ports:
         - containerPort: 50010
         - containerPort: 50020
